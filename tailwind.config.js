@@ -7,5 +7,4 @@ module.exports = {
   corePlugins: {
     preflight: false, // Avoid conflicts with Shopify's base styles
   },
-  prefix: 'tw-', // Add 'tw-' prefix to all Tailwind classes
 };
