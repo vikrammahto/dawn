@@ -1,0 +1,71 @@
+{%- comment -%}Breadcrumbs for Shopify pages{%- endcomment -%}
+{%- if template != 'index' -%}
+  <nav aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 list-none ps-5 my-3 text-[14px]">
+      {%- comment -%}Always link back to home{%- endcomment -%}
+      <li>
+        <a href="/" class="text-gray-500 hover:text-gray-700"> Home </a>
+      </li>
+
+      {%- comment -%}Breadcrumbs for different template types{%- endcomment -%}
+      {%- case template | split: '.' | first -%}
+          {%- comment -%}Collection page breadcrumbs{%- endcomment -%}
+        {%- when 'collection' -%}
+          <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
+          <li aria-current="page" class="text-gray-900">
+            {{ collection.title }}
+          </li>
+
+          {%- comment -%}Product page breadcrumbs{%- endcomment -%}
+        {%- when 'product' -%}
+          {%- if collection -%}
+            <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
+            <li>
+              <a href="{{ collection.url }}" class="text-gray-500 hover:text-gray-700">
+                {{ collection.title }}
+              </a>
+            </li>
+          {%- endif -%}
+          <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
+          <li aria-current="page" class="text-gray-900">
+            {{ product.title }}
+          </li>
+
+          {%- comment -%}Blog and article page breadcrumbs{%- endcomment -%}
+        {%- when 'blog' -%}
+          <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
+          <li aria-current="page" class="text-gray-900">
+            {{ blog.title }}
+          </li>
+
+        {%- when 'article' -%}
+          <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
+          <li>
+            <a href="{{ blog.url }}" class="text-gray-500 hover:text-gray-700">
+              {{ blog.title }}
+            </a>
+          </li>
+          <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
+          <li aria-current="page" class="text-gray-900">
+            {{ article.title }}
+          </li>
+
+          {%- comment -%}Page template breadcrumbs{%- endcomment -%}
+        {%- when 'page' -%}
+          <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
+          <li aria-current="page" class="text-gray-900">
+            {{ page.title }}
+          </li>
+
+          {%- comment -%}Fallback for other templates{%- endcomment -%}
+        {%- else -%}
+          {%- if template != 'index' -%}
+            <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
+            <li aria-current="page" class="text-gray-900">
+              {{ template | split: '.' | first | capitalize }}
+            </li>
+          {%- endif -%}
+      {%- endcase -%}
+    </ol>
+  </nav>
+{%- endif -%}
