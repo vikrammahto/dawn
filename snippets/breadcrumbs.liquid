@@ -1,22 +1,15 @@
-{%- comment -%}Breadcrumbs for Shopify pages{%- endcomment -%}
 {%- if template != 'index' -%}
-  <nav aria-label="Breadcrumb">
-    <ol class="flex items-center space-x-2 list-none ps-5 my-3 text-[14px]">
-      {%- comment -%}Always link back to home{%- endcomment -%}
+  <nav aria-label="Breadcrumb" class="page-width">
+    <ol class="flex items-center space-x-2 list-none my-3 text-[14px] flex-wrap ps-0">
       <li>
         <a href="/" class="text-gray-500 hover:text-gray-700"> Home </a>
       </li>
-
-      {%- comment -%}Breadcrumbs for different template types{%- endcomment -%}
       {%- case template | split: '.' | first -%}
-          {%- comment -%}Collection page breadcrumbs{%- endcomment -%}
         {%- when 'collection' -%}
           <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
           <li aria-current="page" class="text-gray-900">
             {{ collection.title }}
           </li>
-
-          {%- comment -%}Product page breadcrumbs{%- endcomment -%}
         {%- when 'product' -%}
           {%- if collection -%}
             <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
@@ -30,8 +23,6 @@
           <li aria-current="page" class="text-gray-900">
             {{ product.title }}
           </li>
-
-          {%- comment -%}Blog and article page breadcrumbs{%- endcomment -%}
         {%- when 'blog' -%}
           <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
           <li aria-current="page" class="text-gray-900">
@@ -49,15 +40,11 @@
           <li aria-current="page" class="text-gray-900">
             {{ article.title }}
           </li>
-
-          {%- comment -%}Page template breadcrumbs{%- endcomment -%}
         {%- when 'page' -%}
           <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
           <li aria-current="page" class="text-gray-900">
             {{ page.title }}
           </li>
-
-          {%- comment -%}Fallback for other templates{%- endcomment -%}
         {%- else -%}
           {%- if template != 'index' -%}
             <li class="breadcrumb-separator">&nbsp;/&nbsp;</li>
