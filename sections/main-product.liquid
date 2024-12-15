@@ -38,7 +38,6 @@
       }
     }
   {%- endstyle -%}
-
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   {%- if product.quantity_price_breaks_configured? -%}
@@ -54,6 +53,7 @@
   {%- endif -%}
 
   {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+
   {%- if first_3d_model -%}
     {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
     <link
@@ -193,7 +193,7 @@
                     {%- endif -%}
                   {%- endif -%}
                 </p>
-                
+
               {%- when 'description' -%}
                 {%- if product.description != blank -%}
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
@@ -474,6 +474,163 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
+                <ul class="list-none ps-0">
+                  {% if product.available %}
+                    <li></li>
+                  {% endif %}
+                  {% if product.available %}
+                  {% endif %}
+                  <li
+                    class="
+                      flex items-center gap-x-1 {% if product.available %}
+                        text-green-600 {% else %} text-zinc-600
+                      {% endif %}
+                    "
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M5 10L8.5 13.5L16.5 5.78125" stroke="currentColor"></path>
+                    </svg>
+
+                    {% if product.available %}
+                      In Stock - Ready For Dispatch
+                    {% else %}
+                      Oops you missed it
+                    {% endif %}
+                  </li>
+
+                  <li class="flex items-center gap-x-1">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 10L8.5 13.5L16.5 5.78125" stroke="#2B2F2E"></path>
+                    </svg>
+                    15% Off On All Prepaid Orders
+                  </li>
+                  <li class="flex items-center gap-x-1">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 10L8.5 13.5L16.5 5.78125" stroke="#2B2F2E"></path>
+                    </svg>
+                    Free Delivery Available On All Orders
+                  </li>
+                  <li class="flex items-center gap-x-1">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 10L8.5 13.5L16.5 5.78125" stroke="#2B2F2E"></path>
+                    </svg>
+                    Easy Returns & Exchanges
+                  </li>
+                </ul>
+                <div class="bg-zinc-50 py-3 px-6 rounded-lg">
+                  <p class="text-[20px] leading-tight">Our materials are designed to ensure Long-Lasting Durability</p>
+                  <ul class="list-none ps-0 flex flex-col gap-4">
+                    <li class="my-0">
+                      <span class="mb-0">
+                        <img
+                          src="https://cdn.shopify.com/s/files/1/0751/2725/9430/files/material.png?v=1724204287&amp;width=100"
+                          width="40"
+                          height="40"
+                          alt="Water, Heat &amp; Sweat-Proof"
+                        >
+                      </span>
+                      <p class="font-semibold m-0">Water, Heat &amp; Sweat-Proof</p>
+                      <p class="mt-0 leading-tight">Hit the gym, go for a run or even take a shower.</p>
+                    </li>
+                    <li class="my-0">
+                      <span class="mb-0">
+                        <img
+                          src="https://cdn.shopify.com/s/files/1/0751/2725/9430/files/soft.png?v=1724204286&amp;width=100"
+                          width="40"
+                          height="40"
+                          alt="Hypoallergenic (No Green Skin)"
+                        >
+                      </span>
+                      <p class="font-semibold m-0">Hypoallergenic (No Green Skin)</p>
+                      <p class="mt-0 leading-tight">
+                        Made from tarnish-proof 316L stainless steel and suitable for sensitive skin
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="accordion bg-zinc-50 space-y-3">
+                  <details class="border border-zinc-300 px-3 group bg-white m-1 rounded-lg">
+                    <summary class="accordion-header flex justify-between items-center w-full p-4 font-medium text-left text-gray-900 cursor-pointer text-[20px]">
+                      Product Description
+                      <svg
+                        class="w-5 h-5 group-open:rotate-180 transition-transform"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </summary>
+                    <div class="flex flex-col gap-y-2 [&>br]:hidden [&>p]:my-0 leading-tight pb-4">
+                      {{ product.description | newline_to_br }}
+                    </div>
+                  </details>
+                  <details class="border border-zinc-300 px-3 group bg-white m-1 rounded-lg">
+                    <summary class="accordion-header flex justify-between items-center w-full p-4 font-medium text-left text-gray-900 cursor-pointer text-[20px]">
+                      Our Materials
+                      <svg
+                        class="w-5 h-5 group-open:rotate-180 transition-transform"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </summary>
+                    <div class="flex flex-col gap-y-2 [&>br]:hidden [&>p]:my-2 leading-tight pb-4">
+                      <p>
+                        ✓ 316L Stainless Steel & Rhodium ✓ Water, Heat, Sweat Resistant✓ Hypoallergenic (No Green Skin)
+                      </p>
+                      <p>
+                        316L Stainless Steel: Renowned for its toughness, 316L stainless steel ensures that your CRAFTD
+                        pieces remain impervious to tarnishing, rusting, or fading.
+                      </p>
+                      <p>
+                        Rhodium: This indestructible coating provides a final layer of protection, preventing scratches
+                        and maintaining the piece's pristine look.
+                      </p>
+                    </div>
+                  </details>
+                  <details class=" border border-zinc-300 px-3 group bg-white m-1 rounded-lg">
+                    <summary class="accordion-header flex justify-between items-center w-full p-4 font-medium text-left text-gray-900 cursor-pointer text-[20px]">
+                      Shipping & Returns
+                      <svg
+                        class="w-5 h-5 group-open:rotate-180 transition-transform"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </summary>
+                    <div class="flex flex-col gap-y-2 [&>br]:hidden [&>p]:my-0 leading-tight pb-4">
+                      <ul class="ps-[20px] space-y-3">
+                        <li>
+                          <span class="font-semibold">How to Return an Item:</span> We aim to make it as easy as
+                          possible for you to return your items.
+                        </li>
+                        <li>
+                          <span class="font-semibold">Returning items by post:</span> You can return items to us within
+                          14 days and you will be offered a refund for the item price or a store credit to spend online.
+                          We do not do exchanges.
+                        </li>
+                        <li><span class="font-semibold">Mail us at</span> - support@chainzclub.in</li>
+                        <li class="font-semibold">Easy 14 day returns</li>
+                      </ul>
+                    </div>
+                  </details>
+                </div>
+
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
