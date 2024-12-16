@@ -42,7 +42,7 @@
       assign ratio = 1
     endif
   -%}
-  <div class="card-wrapper product-card-wrapper underline-links-hover w-[300px] min-h-[300px] ">
+  <div class="card-wrapper product-card-wrapper underline-links-hover  ">
     <div
       class="
         card card--{{ settings.card_style }}
@@ -51,17 +51,17 @@
         {% if image_shape and image_shape != 'default' %} card--shape{% endif %}
         {% if extend_height %} card--extend-height{% endif %}
         {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
-        {% if horizontal_class %} card--horizontal{% endif %} h-[300px] w-[300px]
+        {% if horizontal_class %} card--horizontal{% endif %} h-[170px] w-[170px]
       "
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
       <div
-        class="h-[300px] w-[300px] card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
+        class="h-[170px] w-[170px] card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
         {%- if card_product.featured_media -%}
           <div class=" rounded-xl card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
-            <div class="media media--transparent media--hover-effect h-[300px] w-[300px]">
+            <div class="media media--transparent media--hover-effect h-[170px] w-[170px]">
               {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
               <img
                 srcset="
@@ -76,7 +76,7 @@
                 src="{{ card_product.featured_media | image_url: width: 533 }}"
                 sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
                 alt="{{ card_product.featured_media.alt | escape }}"
-                class="rounded-xl motion-reduce h-[300px] w-[300px]"
+                class="rounded-xl motion-reduce h-[170px] w-[170px]"
                 {% unless lazy_load == false %}
                   loading="lazy"
                 {% endunless %}
@@ -463,7 +463,7 @@
                     <button
                       type="submit"
                       name="add"
-                      class="bg-black rounded-lg text-white py-2 uppercase "
+                      class="bg-black rounded-lg text-white py-2"
                       aria-haspopup="dialog"
                       aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                       aria-live="polite"
@@ -484,9 +484,11 @@
                               <path fill="currentColor" fill-rule="evenodd" d="M20.5 6.5a4.75 4.75 0 0 0-4.75 4.75v.56h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33l-.77-11.6h-3.16v-.57A4.75 4.75 0 0 0 20.5 6.5m3.75 5.31v-.56a3.75 3.75 0 1 0-7.5 0v.56zm-7.5 1h7.5v.56a3.75 3.75 0 1 1-7.5 0zm-1 0v.56a4.75 4.75 0 1 0 9.5 0v-.56h2.22l.71 10.67a4 4 0 0 1-3.99 4.27h-7.38a4 4 0 0 1-4-4.27l.72-10.67z"></path>
                             </svg>
                           </span>
-                          {{ 'products.product.add_to_cart' | t }}
+                          {% comment %} {{ 'products.product.add_to_cart' | t }} {% endcomment %}
+                            <span class="uppercase">Add</span>
                         {%- else -%}
-                          {{ 'products.product.sold_out' | t }}
+                          {% comment %} {{ 'products.product.sold_out' | t }} {% endcomment %}
+                            Sold Out
                         {%- endif -%}
                       </span>
 
