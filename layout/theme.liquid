@@ -308,7 +308,22 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {% sections 'header-group' %}
+    <div class="sticky top-0 bg-white z-[5000]">
+      {% sections 'header-group' %}
+      <ul class="flex list-none space-x-5 max-w-[120rem] mx-auto lg:hidden py-2 overflow-x-scroll my-0 px-12">
+        {% for collection in collections %}
+          <li>
+            <a
+              href="{{ collection.url }}"
+              title="{{ collection.title }}"
+              class="text-black no-underline text-nowrap text-[13px] font-semibold"
+            >
+              {{ collection.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {% render 'breadcrumbs' %}
