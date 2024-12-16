@@ -271,8 +271,8 @@
   display: flex;
   position: relative;
   width: 100%;
-  align-items: center;
-  justify-content: center;
+  align-items: end;
+  justify-content: start;
   z-index: 2;
 }
 

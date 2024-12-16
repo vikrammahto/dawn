@@ -116,7 +116,8 @@
     </div>
   {%- endif -%}
   {% comment %} <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"> {% endcomment %}
-    <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} justify-start lg:justify-center">
+
+  <div class="p-0 flex relative w-full items-end justify-start z-20 lg:justify-center lg:items-center min-h-[300px]">
     <div class="p-6 text-white">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
@@ -127,10 +128,12 @@
             >
               {{ block.settings.heading }}
             </h2>
-          {% comment %} {%- when 'text' -%}
-            <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-              <p>{{ block.settings.text }}</p>
-            </div> {% endcomment %}
+            {% comment %}
+              {%- when 'text' -%}
+              <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+                <p>{{ block.settings.text }}</p>
+              </div>
+            {% endcomment %}
           {%- when 'buttons' -%}
             <div
               class=" banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}"
@@ -145,8 +148,17 @@
                   {% endif %}
                   class="uppercase bg-white text-black rounded-full px-16 py-3 flex items-center"
                 >
-                  {{- block.settings.button_label_1 | escape -}} 
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#000000" viewBox="0 0 256 256" class="ms-3"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path></svg>
+                  {{- block.settings.button_label_1 | escape -}}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    fill="#000000"
+                    viewBox="0 0 256 256"
+                    class="ms-3"
+                  >
+                    <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
+                  </svg>
                 </a>
               {%- endif -%}
               {%- if block.settings.button_label_2 != blank -%}
